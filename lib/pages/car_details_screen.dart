@@ -1,4 +1,6 @@
 import 'package:car_marketplace/model/car_model.dart';
+import 'package:car_marketplace/pages/favorites_car_screen.dart';
+import 'package:car_marketplace/utils/app_sheet.dart';
 import 'package:car_marketplace/widgets/circle_icon_button_widget.dart';
 import 'package:car_marketplace/widgets/container_price_widget.dart';
 import 'package:car_marketplace/widgets/detail_body_type_widget.dart';
@@ -15,11 +17,7 @@ class CarDetailsScreen extends StatelessWidget {
   const CarDetailsScreen({super.key, required this.carModel});
 
   Widget _divider() {
-    return Container(
-      width: 1,
-      height: 50,
-      color: Colors.white24,
-    );
+    return Container(width: 1, height: 50, color: Colors.white24);
   }
 
   @override
@@ -54,13 +52,32 @@ class CarDetailsScreen extends StatelessWidget {
                 borderRadius: BorderRadius.circular(12),
               ),
               position: PopupMenuPosition.under,
-              onSelected: (value) {},
+              onSelected: (value) {
+                switch (value) {
+                  case 'share':
+                    AppSheet.show(
+                      context: context,
+                      title: "Coming Soon",
+                      message: "Sharing feature is not available yet.",
+                      primaryText: "Share",
+                      secondaryText: "Close",
+                      onPrimaryPressed: () {},
+                    );
+                    break;
+
+                  case 'favorite':
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const FavoritesCarScreen(),
+                      ),
+                    );
+                    break;
+                }
+              },
               itemBuilder: (context) => const [
                 PopupMenuItem(value: 'share', child: Text('Share')),
-                PopupMenuItem(
-                  value: 'favorite',
-                  child: Text('Add to Favorite'),
-                ),
+                PopupMenuItem(value: 'favorite', child: Text('Favorites')),
               ],
             ),
           ),
@@ -149,7 +166,7 @@ class CarDetailsScreen extends StatelessWidget {
                         Expanded(
                           child: DetailBodyTypeWidget(
                             icon: Icons.directions_car,
-                            carModel: carModel
+                            carModel: carModel,
                           ),
                         ),
                         const SizedBox(width: 10),
@@ -157,27 +174,28 @@ class CarDetailsScreen extends StatelessWidget {
                         const SizedBox(width: 10),
                         Expanded(
                           child: DetailExteriorColorWidget(
-                            icon: Icons.palette, 
-                            carModel: carModel
-                          )
+                            icon: Icons.palette,
+                            carModel: carModel,
+                          ),
                         ),
                         const SizedBox(width: 10),
                         _divider(),
                         const SizedBox(width: 10),
                         Expanded(
                           child: DetailFuelTypeWidget(
-                            icon: Icons.local_gas_station, 
-                            carModel: carModel
-                          )
+                            icon: Icons.local_gas_station,
+                            carModel: carModel,
+                          ),
                         ),
                       ],
                     ),
                     const SizedBox(height: 20),
-                    Text(carModel.description ?? '', style: TextStyle(
-                      color: Colors.white.withAlpha(127),
-                    ),),
+                    Text(
+                      carModel.description ?? '',
+                      style: TextStyle(color: Colors.white.withAlpha(127)),
+                    ),
                     const SizedBox(height: 20),
-                    ContainerPriceWidget(carModel: carModel)
+                    ContainerPriceWidget(carModel: carModel),
                   ],
                 ),
               ),
