@@ -6,12 +6,20 @@ import 'package:car_marketplace/widgets/circle_icon_button_widget.dart';
 import 'package:car_marketplace/widgets/search_bar_widget.dart';
 import 'package:flutter/material.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    final List<CarModel> cars = [
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  late List<CarModel> cars;
+
+  @override
+  void initState() {
+    super.initState();
+    cars = [
       CarModel(
         imagePath: 'assets/cars/nissan.png',
         brandName: 'Nissan Pathfinder',
@@ -88,10 +96,19 @@ class HomeScreen extends StatelessWidget {
         fuelType: 'Electric',
       ),
     ];
+  }
 
+  /// Toggle favorite
+  void onFavoritePressed(int index) {
+    setState(() {
+      cars[index].isFavorite = !(cars[index].isFavorite ?? false);
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       extendBodyBehindAppBar: true,
-
       appBar: AppBar(
         elevation: 0,
         toolbarHeight: 80,
@@ -145,7 +162,9 @@ class HomeScreen extends StatelessWidget {
                 ),
                 CircleIconButtonWidget(
                   icon: Icons.notifications,
-                  onPressed: () {},
+                  onPressed: () {
+                    // TODO: Handle notification button press
+                  },
                 ),
               ],
             ),
@@ -170,9 +189,7 @@ class HomeScreen extends StatelessWidget {
               ),
 
               const SizedBox(height: 15),
-
               const SearchBarWidget(),
-
               const SizedBox(height: 10),
 
               Row(
@@ -189,7 +206,6 @@ class HomeScreen extends StatelessWidget {
                       style: TextStyle(
                         fontSize: 12,
                         color: Colors.grey.shade400,
-                        fontWeight: FontWeight.w400,
                       ),
                     ),
                   ),
@@ -230,11 +246,16 @@ class HomeScreen extends StatelessWidget {
               ),
 
               const SizedBox(height: 10),
+
               Expanded(
                 child: ListView.builder(
                   itemCount: cars.length,
                   itemBuilder: (context, index) {
-                    return CarCardWidget(carModel: cars[index]);
+                    return CarCardWidget(
+                      carModel: cars[index],
+                      onFavoritePressed: () =>
+                          onFavoritePressed(index),
+                    );
                   },
                 ),
               ),

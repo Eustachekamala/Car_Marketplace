@@ -12,6 +12,8 @@ class CarModel {
   final String? engine;
   final String? exteriorColor;
   final String? fuelType;
+  bool? isFavorite;
+
 
   CarModel({
     required this.imagePath,
@@ -26,6 +28,6 @@ class CarModel {
     this.highway,
     this.engine,
     this.exteriorColor,
-    this.fuelType,
+    this.fuelType, this.isFavorite,
   });
 }
