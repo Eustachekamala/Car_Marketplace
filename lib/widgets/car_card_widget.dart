@@ -125,8 +125,8 @@ class _CarCardWidgetState extends State<CarCardWidget> {
                                 : Icons.favorite_border,
                             size: 20,
                             color: (widget.carModel.isFavorite ?? false)
-                                ? Colors.red
-                                : Colors.white,
+                                ? Colors.white
+                                : null,
                           ),
                         ),
                       ),

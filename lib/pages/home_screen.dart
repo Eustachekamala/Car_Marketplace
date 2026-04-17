@@ -1,5 +1,9 @@
 import 'package:avatar_plus/avatar_plus.dart';
+import 'package:car_marketplace/data/favorite_store.dart';
 import 'package:car_marketplace/model/car_model.dart';
+import 'package:car_marketplace/pages/favorites_car_screen.dart';
+import 'package:car_marketplace/pages/notifications_screen.dart';
+import 'package:car_marketplace/pages/settings_screen.dart';
 import 'package:car_marketplace/widgets/brand_badge_widget.dart';
 import 'package:car_marketplace/widgets/car_card_widget.dart';
 import 'package:car_marketplace/widgets/circle_icon_button_widget.dart';
@@ -101,7 +105,13 @@ class _HomeScreenState extends State<HomeScreen> {
   /// Toggle favorite
   void onFavoritePressed(int index) {
     setState(() {
-      cars[index].isFavorite = !(cars[index].isFavorite ?? false);
+      final car = cars[index];
+      car.isFavorite = !(car.isFavorite ?? false);
+      if (car.isFavorite == true) {
+        FavoritesStore.favorites.add(car);
+      } else {
+        FavoritesStore.favorites.remove(car);
+      }
     });
   }
 
@@ -135,36 +145,86 @@ class _HomeScreenState extends State<HomeScreen> {
         actions: [
           Padding(
             padding: const EdgeInsets.only(right: 15),
-            child: Stack(
-              alignment: Alignment.center,
+            child: Row(
               children: [
-                Positioned(
-                  top: 8,
-                  right: 8,
-                  child: Container(
-                    height: 15,
-                    width: 15,
-                    decoration: const BoxDecoration(
-                      color: Colors.red,
-                      shape: BoxShape.circle,
-                    ),
-                    child: const Center(
-                      child: Text(
-                        '9',
-                        style: TextStyle(
-                          fontSize: 10,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white,
+                /// NOTIFICATIONS
+                Stack(
+                  alignment: Alignment.center,
+                  children: [
+                    Positioned(
+                      top: 8,
+                      right: 5,
+                      child: Container(
+                        height: 15,
+                        width: 15,
+                        decoration: const BoxDecoration(
+                          color: Colors.red,
+                          shape: BoxShape.circle,
+                        ),
+                        child: const Center(
+                          child: Text(
+                            '3',
+                            style: TextStyle(
+                              fontSize: 10,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white,
+                            ),
+                          ),
                         ),
                       ),
                     ),
-                  ),
+                    CircleIconButtonWidget(
+                      icon: Icons.notifications,
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (_) => const NotificationsScreen(),
+                          ),
+                        );
+                      },
+                    ),
+                  ],
                 ),
-                CircleIconButtonWidget(
-                  icon: Icons.notifications,
-                  onPressed: () {
-                    // TODO: Handle notification button press
+
+                const SizedBox(width: 10),
+
+                /// POPUP MENU
+                PopupMenuButton<String>(
+                  icon: const CircleIconButtonWidget(icon: Icons.more_vert),
+                  color: Colors.teal.shade900,
+                  position: PopupMenuPosition.under,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  onSelected: (value) {
+                    switch (value) {
+                      case 'favorites':
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (_) => const FavoritesCarScreen(),
+                          ),
+                        );
+                        break;
+
+                      case 'settings':
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (_) => const SettingsScreen(),
+                          ),
+                        );
+                        break;
+                    }
                   },
+                  itemBuilder: (context) => const [
+                    PopupMenuItem(
+                      value: 'favorites',
+                      child: Text('Favorites Cars'),
+                    ),
+                    PopupMenuItem(value: 'settings', child: Text('Settings')),
+                  ],
                 ),
               ],
             ),
@@ -253,8 +313,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   itemBuilder: (context, index) {
                     return CarCardWidget(
                       carModel: cars[index],
-                      onFavoritePressed: () =>
-                          onFavoritePressed(index),
+                      onFavoritePressed: () => onFavoritePressed(index),
                     );
                   },
                 ),

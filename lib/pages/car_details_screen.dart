@@ -69,7 +69,7 @@ class CarDetailsScreen extends StatelessWidget {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => const FavoritesCarScreen(),
+                        builder: (context) => FavoritesCarScreen(),
                       ),
                     );
                     break;

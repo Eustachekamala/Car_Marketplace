@@ -53,7 +53,7 @@ class ContainerPriceWidget extends StatelessWidget {
               Expanded(
                 child: MyButtonWidget(
                   onPressed: () {
-                    // TODO: open store / dealership
+                    Navigator.pop(context);
                   },
                   text: 'Visit Store',
                   border: Border.all(
