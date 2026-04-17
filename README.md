@@ -18,9 +18,12 @@ A modern Flutter application showcasing a clean and scalable car marketplace UI.
 
 <p align="center">
   <img src="assets/preview/Onboarding.png" width="250"/>
-  <img src="assets/preview/Home_screen.png" width="250"/>
+  <img src="assets/preview/home_page.png" width="250"/>
+  <img src="assets/preview/home_page1.png" width="250"/>
   <img src="assets/preview/Car_Details_Screen.png" width="250"/>
+  <img src="assets/preview/favorites_page.png" width="250"/>
   <img src="assets/preview/Purchase_Screen.png" width="250"/>
+  <img src="assets/preview/share.png" width="250"/>
 </p>
 
 ---
