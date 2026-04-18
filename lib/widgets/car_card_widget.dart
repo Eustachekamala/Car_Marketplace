@@ -65,6 +65,9 @@ class _CarCardWidgetState extends State<CarCardWidget> {
                           decoration: BoxDecoration(
                             color: Colors.white.withAlpha(20),
                             shape: BoxShape.circle,
+                            border: Border.all(
+                              color: Colors.white12
+                            )
                           ),
                           child: Image.asset(
                             widget.carModel.imagePath,
@@ -114,7 +117,11 @@ class _CarCardWidgetState extends State<CarCardWidget> {
                     ),
                     child: Material(
                       color: Colors.transparent,
-                      shape: const CircleBorder(),
+                      shape: const CircleBorder(
+                        side: BorderSide(
+                          color: Colors.white10
+                        )
+                      ),
                       child: InkWell(
                         borderRadius: BorderRadius.circular(50),
                         onTap: widget.onFavoritePressed,
