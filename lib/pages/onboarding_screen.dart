@@ -23,8 +23,8 @@ class OnboardingScreen extends StatelessWidget {
               decoration: BoxDecoration(
                 gradient: LinearGradient(
                   colors: [
-                    Colors.black.withAlpha(178),
-                    Colors.black.withAlpha(51),
+                    Colors.black.withAlpha(100),
+                    Colors.black.withAlpha(70),
                   ],
                   begin: Alignment.bottomCenter,
                   end: Alignment.topCenter,
@@ -60,7 +60,7 @@ class OnboardingScreen extends StatelessWidget {
                     style: TextStyle(fontSize: 16, color: Colors.white70),
                   ),
 
-                  const SizedBox(height: 40),
+                  const SizedBox(height: 25),
 
                   // Get Started Button
                   SizedBox(
@@ -76,8 +76,8 @@ class OnboardingScreen extends StatelessWidget {
                         );
                       },
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.white,
-                        foregroundColor: Colors.black,
+                        backgroundColor: Color(0xFF0E5546),
+                        foregroundColor: Colors.white,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(50),
                         ),
@@ -91,8 +91,6 @@ class OnboardingScreen extends StatelessWidget {
                       ),
                     ),
                   ),
-
-                  const SizedBox(height: 16),
                 ],
               ),
             ),
