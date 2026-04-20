@@ -10,6 +10,7 @@ class SettingsScreen extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
+        toolbarHeight: 80,
         title: const Text('Settings'),
         centerTitle: true,
         leading: Padding(

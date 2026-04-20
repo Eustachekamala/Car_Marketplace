@@ -28,6 +28,7 @@ class CarDetailsScreen extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
+        toolbarHeight: 80,
         centerTitle: true,
         title: Text(
           carModel.brandName,
@@ -92,7 +93,7 @@ class CarDetailsScreen extends StatelessWidget {
             padding: const EdgeInsets.all(15.0),
             child: Image.asset(
               carModel.imagePath,
-              height: 250,
+              height: 280,
               fit: BoxFit.contain,
             ),
           ),
@@ -115,6 +116,20 @@ class CarDetailsScreen extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
+                    /// Handle bar
+                    Center(
+                      child: Container(
+                        width: 50,
+                        height: 5,
+                        decoration: BoxDecoration(
+                          color: Colors.white24,
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                      ),
+                    ),
+
+                    const SizedBox(height: 20),
+
                     /// CAR NAME
                     Text(
                       carModel.brandName,

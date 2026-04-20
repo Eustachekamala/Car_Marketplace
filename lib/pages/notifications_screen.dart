@@ -10,6 +10,7 @@ class NotificationsScreen extends StatelessWidget {
       appBar: AppBar(
         title: const Text("Notifications"),
         centerTitle: true,
+        toolbarHeight: 80,
         backgroundColor: Colors.transparent,
         elevation: 0,
         leading: Padding(
