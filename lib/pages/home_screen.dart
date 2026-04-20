@@ -249,7 +249,7 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
 
               const SizedBox(height: 15),
-              const SearchBarWidget(),
+              SearchBarWidget(),
               const SizedBox(height: 10),
 
               Row(
