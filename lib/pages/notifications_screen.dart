@@ -11,8 +11,6 @@ class NotificationsScreen extends StatelessWidget {
         title: const Text("Notifications"),
         centerTitle: true,
         toolbarHeight: 80,
-        backgroundColor: Colors.transparent,
-        elevation: 0,
         leading: Padding(
           padding: const EdgeInsets.only(left: 12),
           child: CircleIconButtonWidget(

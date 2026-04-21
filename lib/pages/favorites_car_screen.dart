@@ -16,8 +16,6 @@ class _FavoritesCarScreenState extends State<FavoritesCarScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0,
         toolbarHeight: 80,
         title: const Text('Favorites Cars'),
         centerTitle: true,

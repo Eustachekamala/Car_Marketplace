@@ -26,8 +26,6 @@ class CarDetailsScreen extends StatelessWidget {
       extendBodyBehindAppBar: true,
 
       appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0,
         toolbarHeight: 80,
         centerTitle: true,
         title: Text(

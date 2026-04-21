@@ -120,7 +120,6 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
-        elevation: 0,
         toolbarHeight: 80,
         titleSpacing: 1,
         title: ListTile(
