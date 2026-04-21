@@ -19,11 +19,12 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   late List<CarModel> cars;
+  late List<CarModel> _allCars;
 
   @override
   void initState() {
     super.initState();
-    cars = [
+    _allCars = [
       CarModel(
         imagePath: 'assets/cars/nissan.png',
         brandName: 'Nissan Pathfinder',
@@ -100,6 +101,7 @@ class _HomeScreenState extends State<HomeScreen> {
         fuelType: 'Electric',
       ),
     ];
+    cars = List.from(_allCars);
   }
 
   /// Toggle favorite
@@ -248,7 +250,14 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
 
               const SizedBox(height: 15),
-              SearchBarWidget(),
+              SearchBarWidget(
+                allCars: _allCars,
+                onResults: (filtered) {
+                  setState(() {
+                    cars = filtered;
+                  });
+                },
+              ),
               const SizedBox(height: 10),
 
               Row(
