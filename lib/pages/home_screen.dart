@@ -1,6 +1,7 @@
 import 'package:avatar_plus/avatar_plus.dart';
 import 'package:car_marketplace/data/favorite_store.dart';
 import 'package:car_marketplace/model/car_model.dart';
+import 'package:car_marketplace/pages/cars_screen.dart';
 import 'package:car_marketplace/pages/favorites_car_screen.dart';
 import 'package:car_marketplace/pages/notifications_screen.dart';
 import 'package:car_marketplace/pages/settings_screen.dart';
@@ -18,13 +19,14 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  late List<CarModel> cars;
-  late List<CarModel> _allCars;
+  late List<CarModel> allCars;
+  late List<CarModel> filteredCars;
 
   @override
   void initState() {
     super.initState();
-    _allCars = [
+
+    allCars = [
       CarModel(
         imagePath: 'assets/cars/nissan.png',
         brandName: 'Nissan Pathfinder',
@@ -38,21 +40,6 @@ class _HomeScreenState extends State<HomeScreen> {
         highway: '10 km/l',
         engine: '3.5L V6',
         exteriorColor: 'Black',
-        fuelType: 'Petrol',
-      ),
-      CarModel(
-        imagePath: 'assets/cars/mercedes.png',
-        brandName: 'Mercedes-Benz C-Class',
-        year: '2024',
-        location: 'Bandung',
-        brandLogo: 'assets/brands-logo/mercedes.png',
-        price: 60000,
-        description: 'Luxury sedan with premium interior and smooth ride.',
-        transmission: 'Automatic',
-        bodyType: 'Sedan',
-        highway: '12 km/l',
-        engine: '2.0L Turbo',
-        exteriorColor: 'White',
         fuelType: 'Petrol',
       ),
       CarModel(
@@ -70,45 +57,16 @@ class _HomeScreenState extends State<HomeScreen> {
         exteriorColor: 'Blue',
         fuelType: 'Petrol',
       ),
-      CarModel(
-        imagePath: 'assets/cars/mazda.png',
-        brandName: 'Mazda CX-5',
-        year: '2022',
-        location: 'China',
-        brandLogo: 'assets/brands-logo/mazda.png',
-        price: 30000,
-        description: 'Reliable compact SUV with great fuel efficiency.',
-        transmission: 'Automatic',
-        bodyType: 'SUV',
-        highway: '14 km/l',
-        engine: '2.5L',
-        exteriorColor: 'Red',
-        fuelType: 'Petrol',
-      ),
-      CarModel(
-        imagePath: 'assets/cars/tesla.png',
-        brandName: 'Tesla Model S',
-        year: '2026',
-        location: 'Singapore',
-        brandLogo: 'assets/brands-logo/tesla.png',
-        price: 70000,
-        description: 'Electric luxury car with autopilot and long range.',
-        transmission: 'Automatic',
-        bodyType: 'Sedan',
-        highway: 'Electric Range 600km',
-        engine: 'Dual Motor',
-        exteriorColor: 'Silver',
-        fuelType: 'Electric',
-      ),
     ];
-    cars = List.from(_allCars);
+
+    filteredCars = List.from(allCars);
   }
 
-  /// Toggle favorite
   void onFavoritePressed(int index) {
     setState(() {
-      final car = cars[index];
+      final car = filteredCars[index];
       car.isFavorite = !(car.isFavorite ?? false);
+
       if (car.isFavorite == true) {
         FavoritesStore.favorites.add(car);
       } else {
@@ -121,9 +79,13 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       extendBodyBehindAppBar: true,
+
       appBar: AppBar(
         toolbarHeight: 80,
         titleSpacing: 1,
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+
         title: ListTile(
           leading: AvatarPlus("John"),
           title: const Text(
@@ -143,12 +105,12 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
           ),
         ),
+
         actions: [
           Padding(
             padding: const EdgeInsets.only(right: 15),
             child: Row(
               children: [
-                /// NOTIFICATIONS
                 Stack(
                   alignment: Alignment.center,
                   children: [
@@ -167,8 +129,8 @@ class _HomeScreenState extends State<HomeScreen> {
                             '3',
                             style: TextStyle(
                               fontSize: 10,
-                              fontWeight: FontWeight.bold,
                               color: Colors.white,
+                              fontWeight: FontWeight.bold,
                             ),
                           ),
                         ),
@@ -190,14 +152,9 @@ class _HomeScreenState extends State<HomeScreen> {
 
                 const SizedBox(width: 10),
 
-                /// POPUP MENU
                 PopupMenuButton<String>(
-                  icon: const CircleIconButtonWidget(icon: Icons.more_vert),
+                  icon: const Icon(Icons.more_vert, color: Colors.white),
                   color: Colors.teal.shade900,
-                  position: PopupMenuPosition.under,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12),
-                  ),
                   onSelected: (value) {
                     switch (value) {
                       case 'favorites':
@@ -235,30 +192,33 @@ class _HomeScreenState extends State<HomeScreen> {
 
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+          padding: const EdgeInsets.symmetric(horizontal: 15),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              const SizedBox(height: 20),
+
               const Text(
                 "Let's Find Your Favorite Car Here",
                 style: TextStyle(
                   fontSize: 26,
                   fontWeight: FontWeight.w600,
                   color: Colors.white,
-                  height: 1.3,
                 ),
               ),
 
               const SizedBox(height: 15),
+
               SearchBarWidget(
-                allCars: _allCars,
+                allCars: allCars,
                 onResults: (filtered) {
                   setState(() {
-                    cars = filtered;
+                    filteredCars = filtered;
                   });
                 },
               ),
-              const SizedBox(height: 10),
+
+              const SizedBox(height: 15),
 
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -268,7 +228,12 @@ class _HomeScreenState extends State<HomeScreen> {
                     style: TextStyle(fontSize: 14, color: Colors.white),
                   ),
                   TextButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (_) => const CarsScreen()),
+                      );
+                    },
                     child: Text(
                       "See All",
                       style: TextStyle(
@@ -317,10 +282,10 @@ class _HomeScreenState extends State<HomeScreen> {
 
               Expanded(
                 child: ListView.builder(
-                  itemCount: cars.length,
+                  itemCount: filteredCars.length,
                   itemBuilder: (context, index) {
                     return CarCardWidget(
-                      carModel: cars[index],
+                      carModel: filteredCars[index],
                       onFavoritePressed: () => onFavoritePressed(index),
                     );
                   },
