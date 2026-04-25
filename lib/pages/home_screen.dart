@@ -153,8 +153,12 @@ class _HomeScreenState extends State<HomeScreen> {
                 const SizedBox(width: 10),
 
                 PopupMenuButton<String>(
-                  icon: const Icon(Icons.more_vert, color: Colors.white),
+                  icon: CircleIconButtonWidget(icon: Icons.more_vert,),
                   color: Colors.teal.shade900,
+                  position: PopupMenuPosition.under,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
                   onSelected: (value) {
                     switch (value) {
                       case 'favorites':
