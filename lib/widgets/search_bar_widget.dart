@@ -249,7 +249,7 @@ class _SearchBarWidgetState extends State<SearchBarWidget> {
             decoration: BoxDecoration(
               color: Colors.white.withAlpha(12),
               borderRadius: BorderRadius.circular(50),
-              border: Border.all(color: Colors.white.withAlpha(21)),
+              border: Border.all(color: Colors.white.withAlpha(21), width: 2),
               boxShadow: [
                 BoxShadow(
                   color: Colors.black.withAlpha(35),
@@ -286,7 +286,7 @@ class _SearchBarWidgetState extends State<SearchBarWidget> {
           decoration: BoxDecoration(
             color: Colors.white.withAlpha(12),
             borderRadius: BorderRadius.circular(50),
-            border: Border.all(color: Colors.white.withAlpha(21)),
+            border: Border.all(color: Colors.white.withAlpha(21), width: 2),
             boxShadow: [
               BoxShadow(
                 color: Colors.black.withAlpha(35),

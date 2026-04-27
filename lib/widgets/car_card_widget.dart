@@ -66,7 +66,8 @@ class _CarCardWidgetState extends State<CarCardWidget> {
                             color: Colors.white.withAlpha(20),
                             shape: BoxShape.circle,
                             border: Border.all(
-                              color: Colors.white12
+                              color: Colors.white12,
+                              width: 2
                             )
                           ),
                           child: Image.asset(
@@ -114,27 +115,23 @@ class _CarCardWidgetState extends State<CarCardWidget> {
                     decoration: BoxDecoration(
                       color: Colors.white.withAlpha(20),
                       shape: BoxShape.circle,
+                      border: Border.all(
+                        color: Colors.white12,
+                        width: 2
+                      )
                     ),
-                    child: Material(
-                      color: Colors.transparent,
-                      shape: const CircleBorder(
-                        side: BorderSide(
-                          color: Colors.white10
-                        )
-                      ),
-                      child: InkWell(
-                        borderRadius: BorderRadius.circular(50),
-                        onTap: widget.onFavoritePressed,
-                        child: Center(
-                          child: Icon(
-                            (widget.carModel.isFavorite ?? false)
-                                ? Icons.favorite_rounded
-                                : Icons.favorite_border,
-                            size: 20,
-                            color: (widget.carModel.isFavorite ?? false)
-                                ? Colors.white
-                                : null,
-                          ),
+                    child: InkWell(
+                      borderRadius: BorderRadius.circular(50),
+                      onTap: widget.onFavoritePressed,
+                      child: Center(
+                        child: Icon(
+                          (widget.carModel.isFavorite ?? false)
+                              ? Icons.favorite_rounded
+                              : Icons.favorite_border,
+                          size: 20,
+                          color: (widget.carModel.isFavorite ?? false)
+                              ? Colors.white
+                              : null,
                         ),
                       ),
                     ),

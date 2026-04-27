@@ -71,6 +71,10 @@ class AppBottomModalSheetWidget extends StatelessWidget {
                   text: secondaryText ?? '',
                   color: Colors.white10,
                   textColor: Colors.white,
+                  border: Border.all(
+                    color: Colors.white.withAlpha(60),
+                    width: 2,
+                  ),
                 ),
               ),
               const SizedBox(width: 10),
