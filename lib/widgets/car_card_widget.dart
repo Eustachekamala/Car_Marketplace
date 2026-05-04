@@ -31,7 +31,7 @@ class _CarCardWidgetState extends State<CarCardWidget> {
           );
         },
         child: Container(
-          height: 280,
+          height: 300,
           margin: const EdgeInsets.only(bottom: 20),
           padding: const EdgeInsets.all(16),
           decoration: BoxDecoration(
@@ -51,7 +51,6 @@ class _CarCardWidgetState extends State<CarCardWidget> {
           ),
 
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Row(
                 children: [
@@ -65,10 +64,7 @@ class _CarCardWidgetState extends State<CarCardWidget> {
                           decoration: BoxDecoration(
                             color: Colors.white.withAlpha(20),
                             shape: BoxShape.circle,
-                            border: Border.all(
-                              color: Colors.white12,
-                              width: 2
-                            )
+                            border: Border.all(color: Colors.white12, width: 2),
                           ),
                           child: Image.asset(
                             widget.carModel.imagePath,
@@ -115,10 +111,7 @@ class _CarCardWidgetState extends State<CarCardWidget> {
                     decoration: BoxDecoration(
                       color: Colors.white.withAlpha(20),
                       shape: BoxShape.circle,
-                      border: Border.all(
-                        color: Colors.white12,
-                        width: 2
-                      )
+                      border: Border.all(color: Colors.white12, width: 2),
                     ),
                     child: InkWell(
                       borderRadius: BorderRadius.circular(50),
@@ -143,8 +136,154 @@ class _CarCardWidgetState extends State<CarCardWidget> {
 
               Expanded(
                 child: Center(
-                  child: Image.asset(widget.carModel.imagePath, fit: BoxFit.contain),
+                  child: Image.asset(
+                    widget.carModel.imagePath,
+                    fit: BoxFit.contain,
+                  ),
                 ),
+              ),
+
+              const SizedBox(height: 15),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Row(
+                    children: [
+                      if (widget.carModel.transmission != null) ...[
+                        Container(
+                          decoration: BoxDecoration(
+                            color: Colors.white.withAlpha(20),
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 6,
+                            vertical: 6,
+                          ),
+                          child: Row(
+                            children: [
+                              const Icon(
+                                Icons.settings,
+                                size: 12,
+                                color: Colors.white70,
+                              ),
+                              const SizedBox(width: 4),
+                              Text(
+                                widget.carModel.transmission!,
+                                style: const TextStyle(
+                                  color: Colors.white70,
+                                  fontSize: 12,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                      const SizedBox(width: 6),
+                      if (widget.carModel.bodyType != null) ...[
+                        Container(
+                          decoration: BoxDecoration(
+                            color: Colors.white.withAlpha(20),
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 6,
+                            vertical: 6,
+                          ),
+                          child: Row(
+                            children: [
+                              const Icon(
+                                Icons.directions_car,
+                                size: 12,
+                                color: Colors.white70,
+                              ),
+                              const SizedBox(width: 4),
+                              Text(
+                                widget.carModel.bodyType!,
+                                style: const TextStyle(
+                                  color: Colors.white70,
+                                  fontSize: 12,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                      const SizedBox(width: 6),
+                      if (widget.carModel.fuelType != null) ...[
+                        Container(
+                          decoration: BoxDecoration(
+                            color: Colors.white.withAlpha(20),
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 6,
+                            vertical: 6,
+                          ),
+                          child: Row(
+                            children: [
+                              const Icon(
+                                Icons.local_gas_station,
+                                size: 12,
+                                color: Colors.white70,
+                              ),
+                              const SizedBox(width: 4),
+                              Text(
+                                widget.carModel.fuelType!,
+                                style: const TextStyle(
+                                  color: Colors.white70,
+                                  fontSize: 12,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ],
+                  ),
+                  Container(
+                    decoration: BoxDecoration(
+                      color: Colors.teal.withAlpha(
+                        38,
+                      ), // Softer transparency
+                      borderRadius: BorderRadius.circular(12),
+                      border: Border.all(
+                        color: Colors.teal.withAlpha(76), // Subtle outline
+                        width: 1,
+                      ),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.teal.withAlpha(25),
+                          blurRadius: 8,
+                          offset: const Offset(0, 2),
+                        ),
+                      ],
+                    ),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 12,
+                      vertical: 8,
+                    ),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        const Icon(
+                          Icons.attach_money,
+                          size: 16,
+                          color: Colors.teal,
+                        ),
+                        const SizedBox(width: 4),
+                        Text(
+                          '\$${widget.carModel.price.toStringAsFixed(2)}',
+                          style: const TextStyle(
+                            color: Colors.white,
+                            fontSize: 16,
+                            fontWeight: FontWeight.w700, // More modern weight
+                            letterSpacing: -0.5, // Tighter tracking
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
               ),
             ],
           ),
