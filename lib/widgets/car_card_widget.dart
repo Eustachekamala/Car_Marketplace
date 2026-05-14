@@ -33,7 +33,7 @@ class _CarCardWidgetState extends State<CarCardWidget> {
         child: Container(
           height: 300,
           margin: const EdgeInsets.only(bottom: 20),
-          padding: const EdgeInsets.all(16),
+          padding: const EdgeInsets.all(12),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(20),
             gradient: LinearGradient(
@@ -147,97 +147,22 @@ class _CarCardWidgetState extends State<CarCardWidget> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Row(
+                  Wrap(
+                    spacing: 4,
+                    crossAxisAlignment: WrapCrossAlignment.center,
                     children: [
-                      if (widget.carModel.transmission != null) ...[
-                        Container(
-                          decoration: BoxDecoration(
-                            color: Colors.white.withAlpha(20),
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 6,
-                            vertical: 6,
-                          ),
-                          child: Row(
-                            children: [
-                              const Icon(
-                                Icons.settings,
-                                size: 12,
-                                color: Colors.white70,
-                              ),
-                              const SizedBox(width: 4),
-                              Text(
-                                widget.carModel.transmission!,
-                                style: const TextStyle(
-                                  color: Colors.white70,
-                                  fontSize: 12,
-                                ),
-                              ),
-                            ],
-                          ),
+                      if (widget.carModel.transmission != null)
+                        _buildFeatureTag(
+                          widget.carModel.transmission!,
                         ),
-                      ],
-                      const SizedBox(width: 6),
-                      if (widget.carModel.bodyType != null) ...[
-                        Container(
-                          decoration: BoxDecoration(
-                            color: Colors.white.withAlpha(20),
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 6,
-                            vertical: 6,
-                          ),
-                          child: Row(
-                            children: [
-                              const Icon(
-                                Icons.directions_car,
-                                size: 12,
-                                color: Colors.white70,
-                              ),
-                              const SizedBox(width: 4),
-                              Text(
-                                widget.carModel.bodyType!,
-                                style: const TextStyle(
-                                  color: Colors.white70,
-                                  fontSize: 12,
-                                ),
-                              ),
-                            ],
-                          ),
+                      if (widget.carModel.bodyType != null)
+                        _buildFeatureTag(
+                          widget.carModel.bodyType!,
                         ),
-                      ],
-                      const SizedBox(width: 6),
-                      if (widget.carModel.fuelType != null) ...[
-                        Container(
-                          decoration: BoxDecoration(
-                            color: Colors.white.withAlpha(20),
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 6,
-                            vertical: 6,
-                          ),
-                          child: Row(
-                            children: [
-                              const Icon(
-                                Icons.local_gas_station,
-                                size: 12,
-                                color: Colors.white70,
-                              ),
-                              const SizedBox(width: 4),
-                              Text(
-                                widget.carModel.fuelType!,
-                                style: const TextStyle(
-                                  color: Colors.white70,
-                                  fontSize: 12,
-                                ),
-                              ),
-                            ],
-                          ),
+                      if (widget.carModel.fuelType != null)
+                        _buildFeatureTag(
+                          widget.carModel.fuelType!,
                         ),
-                      ],
                     ],
                   ),
                   Container(
@@ -272,7 +197,7 @@ class _CarCardWidgetState extends State<CarCardWidget> {
                         ),
                         const SizedBox(width: 4),
                         Text(
-                          '\$${widget.carModel.price.toStringAsFixed(2)}',
+                          widget.carModel.price.toStringAsFixed(2),
                           style: const TextStyle(
                             color: Colors.white,
                             fontSize: 16,
@@ -288,6 +213,24 @@ class _CarCardWidgetState extends State<CarCardWidget> {
             ],
           ),
         ),
+      ),
+    );
+  }
+
+  Widget _buildFeatureTag(String text) {
+    return Container(
+      decoration: BoxDecoration(
+        color: Colors.white.withAlpha(20),
+        borderRadius: BorderRadius.circular(10),
+      ),
+      padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 6),
+      child: Row(
+        children: [
+          Text(
+            text,
+            style: const TextStyle(color: Colors.white70, fontSize: 12),
+          ),
+        ],
       ),
     );
   }
